@@ -20,11 +20,11 @@ All engine interfaces must have a named export called `metadata`, which gives We
 
 The `metadata` export must be an object with the following properties.
 
-| Property   | Description                                                                      | Required |
-|------------|----------------------------------------------------------------------------------|----------|
-| extensions | An array of file extensions supported by the engine (including the trailing dot) | **✓**    |
-| handle     | A string uniquely identifying the template engine                                | **✓**    |
-| config     | A config block to be appended to the global schema, as per [convict](https://github.com/mozilla/node-convict)'s format. If the `handle` is  `myEngine` and you add a config parameter of `myProperty`, its value in Web's configuration file should go in `engines.myEngine.myProperty`| **✗**    |
+| Property     | Description                                                                      | Required |
+|--------------|----------------------------------------------------------------------------------|----------|
+| `extensions` | An array of file extensions supported by the engine (including the trailing dot) | **✓**    |
+| `handle`     | A string uniquely identifying the template engine                                | **✓**    |
+| `config`     | A config block to be appended to the global schema, as per [convict](https://github.com/mozilla/node-convict)'s format. If the `handle` is  `myEngine` and you add a config parameter of `myProperty`, its value in Web's configuration file should go in `engines.myEngine.myProperty`| **✗**    |
 
 ### Main block
 
@@ -34,12 +34,12 @@ The main export must be a factory function that returns a constructor for the en
 
 The engine constructor will be called with an `options` object, containing the following properties.
 
-| Property            | Description                                                                      |
-|---------------------|----------------------------------------------------------------------------------|
-| additionalTemplates | An array of absolute paths to any templates found with an extension supported by this engine that haven't already been loaded due to not having a JSON schema file (i.e. are not pages). This is used by engines that wish to actively load/compile partial templates. |
-| config              | A reference to the global configuration object from core                         |
-| pagesPath           | The absolute path to the directory containing pages/templates                    |
-| templates           | A hash map containing all the templates that have been loaded                    |
+| Property              | Description                                                                      |
+|-----------------------|----------------------------------------------------------------------------------|
+| `additionalTemplates` | An array of absolute paths to any templates found with an extension supported by this engine that haven't already been loaded due to not having a JSON schema file (i.e. are not pages). This is used by engines that wish to actively load/compile partial templates. |
+| `config`              | A reference to the global configuration object from core                         |
+| `pagesPath`           | The absolute path to the directory containing pages/templates                    |
+| `templates`           | A hash map containing all the templates that have been loaded                    |
 
 ### Functions
 
