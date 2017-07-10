@@ -10,7 +10,7 @@
 
 This repository serves as a starting point to develop a new engine interface for DADI Web.
 
-## API
+# API
 
 This section describes Web's Engine API, listing the properties and functions that engine interfaces are expected to expose.
 
@@ -39,7 +39,7 @@ The engine constructor will be called with an `options` object, containing the f
 | `additionalTemplates` | An array of absolute paths to any templates found with an extension supported by this engine that haven't already been loaded due to not having a JSON schema file (i.e. are not pages). This is used by engines that wish to actively load/compile partial templates. |
 | `config`              | A reference to the global configuration object from core                         |
 | `pagesPath`           | The absolute path to the directory containing pages/templates                    |
-| `templates`           | A hash map containing all the templates that have been loaded                    |
+| `templates           | A hash map containing all the templates that have been loaded                    |
 
 ### Functions
 
@@ -92,9 +92,9 @@ This method is called when the core loads a page that requires this particular t
 
 > #### `.register()`
 > **Arguments:**
-> - name: The name of the template to be registered
-> - data: The content (markup) of the template
-> - path: The absolute path to the template file
+> - `name`: The name of the template to be registered
+> - `data`: The content (markup) of the template
+> - `path`: The absolute path to the template file
 >
 > **Returns:** Promise
 >
@@ -107,13 +107,23 @@ This method is called when the core reads the content of a page template and wis
 
 > #### `.render()`
 > **Arguments:**
-> - name: The name of the template to be rendered
-> - data: The content (markup) of the template
-> - locals: An object with data to be passed to the template
-> - options: A list of options passed by the core. Currently, it only includes a `keepWhitespace` property, which engines may wish to implement, specifying whether or not whitespace in templates should be preserved.
+> - `name`: The name of the template to be rendered
+> - `data`: The content (markup) of the template
+> - `locals`: An object with data to be passed to the template
+> - `options`: A list of options passed by the core. Currently, it only includes a `keepWhitespace` property, which engines may wish to implement, specifying whether or not whitespace in templates should be preserved.
 >
 > **Returns:** Promise
 >
 > **Required:** Yes
 
 This method is called when a view wishes to render a template as HTML. Depending on how the engine interface is implemented, this could involve a compile step or simply loading a function from a cache. It returns a Promise, so asynchronous operations can be executed.
+
+# Helper functions
+
+A helpers file located in [`lib/helpers.js`](lib/helpers.js) provides a few file manipulation methods that developers might find useful when creating an engine interface. The signature and description for these functions is available in [JSDoc](http://usejsdoc.org/) format alongside the code.
+
+# Unit tests
+
+Engine adapters are responsible for testing their own functionality. This repository includes a test suite powered by [mocha](https://mochajs.org/), including [Sinon](http://sinonjs.org/) for mocking/stubbing and [html-looks-like](https://www.npmjs.com/package/html-looks-like) for easier comparison of HTML output.
+
+To run the tests, type `npm run test`.
