@@ -50,7 +50,7 @@ The object returned from the constructor should have the following functions in 
 >
 > **Returns:** Function
 >
-> **Required:** No
+> **Required:** ✗
 
 This method is fired by the core after all pages have been loaded. It can be used by engines to perform clean-up operations or to load additional templates (e.g. partials).
 
@@ -61,7 +61,7 @@ This method is fired by the core after all pages have been loaded. It can be use
 >
 > **Returns:** Function
 >
-> **Required:** Yes
+> **Required:** ✓
 
 Must return a reference to the core module used by the template engine.
 
@@ -73,7 +73,7 @@ Must return a reference to the core module used by the template engine.
 >
 > **Returns:** Object
 >
-> **Required:** Yes
+> **Required:** ✓
 
 Must return an object containing information about the template engine, such as name and version.
 
@@ -84,7 +84,7 @@ Must return an object containing information about the template engine, such as 
 >
 > **Returns:** Promise
 >
-> **Required:** Yes
+> **Required:** ✓
 
 This method is called when the core loads a page that requires this particular template engine. Because it can return a Promise, it can do any necessary asynchronous initialisation routines and resolve when finished.
 
@@ -98,7 +98,7 @@ This method is called when the core loads a page that requires this particular t
 >
 > **Returns:** Promise
 >
-> **Required:** Yes
+> **Required:** ✓
 
 This method is called when the core reads the content of a page template and wishes to register it with the engine. This is a good place to compile templates into functions. It can return a Promise, so the compilation can happen asynchronously.
 
@@ -114,7 +114,7 @@ This method is called when the core reads the content of a page template and wis
 >
 > **Returns:** Promise
 >
-> **Required:** Yes
+> **Required:** ✓
 
 This method is called when a view wishes to render a template as HTML. Depending on how the engine interface is implemented, this could involve a compile step or simply loading a function from a cache. It returns a Promise, so asynchronous operations can be executed.
 
