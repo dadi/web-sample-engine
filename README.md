@@ -39,7 +39,7 @@ The engine constructor will be called with an `options` object, containing the f
 | `additionalTemplates` | An array of absolute paths to any templates found with an extension supported by this engine that haven't already been loaded due to not having a JSON schema file (i.e. are not pages). This is used by engines that wish to actively load/compile partial templates. |
 | `config`              | A reference to the global configuration object from core                         |
 | `pagesPath`           | The absolute path to the directory containing pages/templates                    |
-| `templates           | A hash map containing all the templates that have been loaded                    |
+| `templates`           | A hash map containing all the templates that have been loaded                    |
 
 ### Functions
 
