@@ -11,7 +11,6 @@ module.exports.mockTemplate = () => {
   }
 
   Template.prototype.register = function (data) {
-    console.log('----> data:', data)
     return Promise.resolve(data)
   }
 
