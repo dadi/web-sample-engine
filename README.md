@@ -1,4 +1,6 @@
-# DADI Web sample engine interface
+<img src="https://dadi.tech/assets/products/dadi-web-full.png" alt="DADI Web" height="65"/>
+
+## Sample engine interface
 
 [![npm (scoped)](https://img.shields.io/npm/v/@dadi/web-sample-engine.svg?maxAge=10800&style=flat-square)](https://www.npmjs.com/package/@dadi/web-sample-engine)
 [![coverage](https://img.shields.io/badge/coverage-0%25-red.svg?style=flat?style=flat-square)](https://github.com/dadi/web-sample-engine)
@@ -6,15 +8,23 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat-square)](http://standardjs.com/)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
 
+This repository serves as a starting point to develop a new engine interface for DADI Web.
+
 ## API
+
+This section describes Web's Engine API, listing the properties and functions that engine interfaces are expected to expose.
 
 ### Metadata block
 
-All engine interfaces must have a named export called `metadata`, consisting of an object with the following properties:
+All engine interfaces must have a named export called `metadata`, which gives Web a preliminary round of information about the engine before anything else is loaded. This is important because engine interfaces are initialised *on demand*, which means that a given engine will only be started when/if a template requires it.
 
-- `extensions`: An array of file extensions supported by the engine (including the trailing dot);
+The `metadata` export must be an object with the following properties.
 
-- `handle`: A string uniquely identifying the template engine.
+| Property   | Description                                                                      | Required |
+|------------|----------------------------------------------------------------------------------|----------|
+| extensions | An array of file extensions supported by the engine (including the trailing dot) | **✓**    |
+| handle     | A string uniquely identifying the template engine                                | **✓**    |
+| config     | A config block to be appended to the global schema, as per [convict](https://github.com/mozilla/node-convict)'s format. If the `handle` is  `myEngine` and you add a config parameter of `myProperty`, its value in Web's configuration file should go in `engines.myEngine.myProperty`| **✗**    |
 
 ### Main block
 
@@ -22,17 +32,18 @@ The main export must be a factory function that returns a constructor for the en
 
 ### Constructor
 
-The engine constructor will be called with an `options` object, containing the following properties:
+The engine constructor will be called with an `options` object, containing the following properties.
 
-- `additionalTemplates`: An array of absolute paths to any templates found with an extension supported by this engine that haven't already been loaded due to not having a JSON schema file (i.e. are not pages). This is used by engines that wish to actively load/compile partial templates;
-
-- `config`: A reference to the global configuration object from core;
-
-- `pagesPath`: The absolute path to the directory containing pages/templates;
-
-- `templates`: A hash map containing all the templates that have been loaded.
+| Property            | Description                                                                      |
+|---------------------|----------------------------------------------------------------------------------|
+| additionalTemplates | An array of absolute paths to any templates found with an extension supported by this engine that haven't already been loaded due to not having a JSON schema file (i.e. are not pages). This is used by engines that wish to actively load/compile partial templates. |
+| config              | A reference to the global configuration object from core                         |
+| pagesPath           | The absolute path to the directory containing pages/templates                    |
+| templates           | A hash map containing all the templates that have been loaded                    |
 
 ### Functions
+
+The object returned from the constructor should have the following functions in its prototype.
 
 > #### `.finishLoading()`
 > **Arguments:** N/A
