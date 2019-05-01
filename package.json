@@ -26,10 +26,10 @@
   },
   "devDependencies": {
     "colors": "^1.1.2",
+    "coveralls": "^3.0.3",
     "env-test": "^1.0.0",
     "html-looks-like": "^1.0.2",
     "istanbul": "latest",
-    "istanbul-cobertura-badger": "^1.1.0",
     "mocha": "~3.2.0",
     "semantic-release": "^6.3.2",
     "should": "~4.0.4",
